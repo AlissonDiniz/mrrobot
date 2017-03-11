@@ -9,4 +9,4 @@ Technologies used:
   - Twitter BootStrap
   
 
-Paste texts in the Mr Robot classify for you, if the indicated text category is wrong, you can teach the system 
+Paste texts into Mr Robot and ask it to classify it for you, if the given text category is wrong, you can teach the system
