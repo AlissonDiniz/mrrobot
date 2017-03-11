@@ -11,6 +11,6 @@ package br.com.mrrobot;
  */
 public class Config {
     public static final String CHARSET = "ISO-8859-1";
-    public static final String TRAIN_PATH = "C:\\Users\\vntalqd\\Documents\\NetBeansProjects\\mrrobot\\src\\main\\resources\\static\\train_text.txt";
-    public static final String KNOWLEDGE_PATH = "C:\\Users\\vntalqd\\Documents\\NetBeansProjects\\mrrobot\\src\\main\\resources\\static\\knowledge.txt";
+    public static final String TRAIN_FILE = "static/train_text.txt";
+    public static final String KNOWLEDGE_FILE = "static/knowledge.txt";
 }

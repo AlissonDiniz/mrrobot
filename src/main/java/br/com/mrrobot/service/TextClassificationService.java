@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 /**
@@ -43,7 +44,7 @@ public class TextClassificationService {
 
     public CategoryTO classify(String text) {
         try {
-            File knowledge = new File(Config.KNOWLEDGE_PATH);
+            File knowledge = new ClassPathResource(Config.KNOWLEDGE_FILE).getFile();
             this.classifier = (LMClassifier) AbstractExternalizable.readObject(knowledge);
             ConditionalClassification conditionalClassification = this.classifier.classify(text);
             return new CategoryTO(1l, conditionalClassification.bestCategory());
@@ -59,7 +60,7 @@ public class TextClassificationService {
         String[] categoryArray = categoryList.stream().map(it -> it.getName()).collect(Collectors.toList()).toArray(new String[]{});
         int nGram = 7;
         this.classifier = DynamicLMClassifier.createNGramProcess(categoryArray, nGram);
-        AbstractExternalizable.compileTo((Compilable) this.classifier, new File(Config.KNOWLEDGE_PATH));
+        AbstractExternalizable.compileTo((Compilable) this.classifier, new ClassPathResource(Config.KNOWLEDGE_FILE).getFile());
     }
     
     @SuppressWarnings("unchecked")
@@ -76,7 +77,7 @@ public class TextClassificationService {
                     ((ObjectHandler) this.classifier).handle(classified);
                 });
             });
-            AbstractExternalizable.compileTo((Compilable) this.classifier, new File(Config.KNOWLEDGE_PATH));
+            AbstractExternalizable.compileTo((Compilable) this.classifier, new ClassPathResource(Config.KNOWLEDGE_FILE).getFile());
         }
     }
 
@@ -87,7 +88,7 @@ public class TextClassificationService {
         }
         String review;
         try {
-            File trainFile = new File(Config.TRAIN_PATH);
+            File trainFile = new ClassPathResource(Config.TRAIN_FILE).getFile();
             Files.writeBytesToFile(content.getBytes(), trainFile);
             review = Files.readFromFile(trainFile, Config.CHARSET);
             Text text = new Text(review);
@@ -103,7 +104,7 @@ public class TextClassificationService {
         Category category = this.categoryRepository.findOne(categoryId);
         String review;
         try {
-            File trainFile = new File(Config.TRAIN_PATH);
+            File trainFile = new ClassPathResource(Config.TRAIN_FILE).getFile();
             Files.writeBytesToFile(content.getBytes(), trainFile);
             review = Files.readFromFile(trainFile, Config.CHARSET);
             Text text = new Text(review);

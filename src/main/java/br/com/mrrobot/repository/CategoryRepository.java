@@ -6,7 +6,6 @@
 package br.com.mrrobot.repository;
 
 import br.com.mrrobot.domain.Category;
-import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -17,5 +16,4 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
 
     Category findByName(String name);
 
-    List<Category> findAllByActive(boolean active);
 }

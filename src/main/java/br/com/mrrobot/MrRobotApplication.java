@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ClassPathResource;
 
 @SpringBootApplication
 public class MrRobotApplication extends SpringBootServletInitializer {
@@ -30,14 +31,8 @@ public class MrRobotApplication extends SpringBootServletInitializer {
             repository.save(new Category("Science"));
             repository.save(new Category("Technology"));
             
-            File knowledge = new File(Config.KNOWLEDGE_PATH);
-            File trainFile = new File(Config.TRAIN_PATH);
-            if (!knowledge.exists()) {
-                knowledge.createNewFile();
-            }
-            if (!trainFile.exists()) {
-                trainFile.createNewFile();
-            }
+            File knowledge = new ClassPathResource(Config.KNOWLEDGE_FILE).getFile();
+            File trainFile = new ClassPathResource(Config.TRAIN_FILE).getFile();
             Files.writeBytesToFile("".getBytes(), knowledge);
             Files.writeBytesToFile("".getBytes(), trainFile);
             service.init();

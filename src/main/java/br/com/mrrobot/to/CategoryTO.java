@@ -11,9 +11,12 @@ package br.com.mrrobot.to;
  */
 public class CategoryTO {
 
-    private final long id;
-    private final String name;
+    private long id;
+    private String name;
 
+    public CategoryTO() {
+    }
+    
     public CategoryTO(long id, String name) {
         this.id = id;
         this.name = name;

@@ -1,6 +1,9 @@
 {
-    "elements": {},
+    "elements": {
+        "main-content": {}
+    },
     "attributes": {
-        "integrity": {}
+        "integrity": {},
+        "main-content": {}
     }
 }
